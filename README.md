@@ -21,6 +21,16 @@ Converts the bytes into hexadecimal format
 Compares the file header with known signatures
 Prints the detected file type
 
+Code Concepts Used
+This project helps beginners learn:
+File handling
+Binary file reading
+Dictionaries
+Byte strings
+Hexadecimal values
+Conditional statements (if-elif)
+Loops with any()
+Basic cybersecurity/file forensics concepts
 
 Future Improvements:
 Add ZIP file support
@@ -31,3 +41,6 @@ Scan folders recursively
 Export scan results to a text file
 Detect corrupted files
 Build a command-line tool
+
+License
+This project is free to use for educational and learning purposes.
