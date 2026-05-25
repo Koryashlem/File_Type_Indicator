@@ -1,22 +1,45 @@
+import os
 from signature import magic_db
+from signature import extension_map
 
-try:
-    filePath = input("Enter file path: ").strip('"')
-    with open(filePath, "rb") as readFile:
-        header = readFile.read(64)
+print("----Welcome to the File Type Identifier----\n")
 
-    found = False
-    for fileType, signatures in magic_db.items():
-        for offset, sig in signatures:
-            if header[offset:offset + len(sig)] == sig:
-                print("File Type:", fileType.upper())
-                found = True
-                break
-        if found:
+filePath = input("Enter file path: ").strip('"')
+
+# Extract extension
+extension = os.path.splitext(filePath)[1]
+extension = extension.replace(".", "").lower()
+
+with open(filePath, "rb") as readFile:
+    header = readFile.read(64)
+
+found = False
+actualType = None
+
+for fileType, signatures in magic_db.items():
+
+    for offset, sig in signatures:
+
+        if header[offset:offset + len(sig)] == sig:
+
+            actualType = fileType
+            found = True
             break
-    if not found:
-        print("Unknown file type")
-except Exception as e:
-    print("Error:", e)
 
-input("Press Enter to exit...")
+    if found:
+        break
+
+if found:
+
+    print("Detected File Type:", actualType.upper())
+    print("File Extension:", extension.upper())
+
+    if extension in extension_map.get(actualType, []):
+        print("Extension Status: VALID")
+    else:
+        print("WARNING: Extension does NOT match actual file type")
+
+else:
+    print("Unknown file type")
+
+print("Actual filename:", os.path.basename(filePath))
