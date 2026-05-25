@@ -7,7 +7,7 @@ A file renamed from .exe to .jpg will still be detected as an executable file.
 A valid PNG image will be identified correctly even if its extension is changed.
 
 Features:
-Detects files using binary signatures
+Detects files including (ZIP, MP4, ISO) using binary signatures
 Works regardless of file extension
 Lightweight and fast
 Easy to understand for beginners
@@ -33,7 +33,6 @@ Loops with any()
 Basic cybersecurity/file forensics concepts
 
 Future Improvements:
-Add ZIP file support
 Detect DOCX, XLSX, and PPTX files
 Add more image/audio/video formats
 Create a graphical user interface (GUI)
