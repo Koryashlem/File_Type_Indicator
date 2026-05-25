@@ -1,23 +1,22 @@
 from signature import magic_db
 
-filePath = input("Enter file path: ").strip('"')
+try:
+    filePath = input("Enter file path: ").strip('"')
+    with open(filePath, "rb") as readFile:
+        header = readFile.read(64)
 
-with open(filePath, "rb") as readFile:
-    header = readFile.read(64)
-
-found = False
-
-for fileType, signatures in magic_db.items():
-
-    for offset, sig in signatures:
-
-        if header[offset:offset + len(sig)] == sig:
-            print("File Type:", fileType.upper())
-            found = True
+    found = False
+    for fileType, signatures in magic_db.items():
+        for offset, sig in signatures:
+            if header[offset:offset + len(sig)] == sig:
+                print("File Type:", fileType.upper())
+                found = True
+                break
+        if found:
             break
+    if not found:
+        print("Unknown file type")
+except Exception as e:
+    print("Error:", e)
 
-    if found:
-        break
-
-if not found:
-    print("Unknown file type")
+input("Press Enter to exit...")
